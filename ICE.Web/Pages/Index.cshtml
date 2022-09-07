@@ -1,0 +1,64 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <input type="text" name="x" id="x-el" />
+    
+    <select name="op" id="op-el"></select>
+
+    <input type="text" name="y" id="y-el" />
+
+    <button onclick="calc()">Calc</button>
+
+</div>
+
+@section Scripts {
+<script>
+
+    window.addEventListener('load', (event) => {          
+        const list = document.querySelector('#op-el');
+        //const getAll = document.getElementById('get-cars');
+        fetch('http://localhost:5052/api/Operations')
+            .then(response => response.json())
+            .then(operations => {
+                for (let key in operations) {
+                    var opt = document.createElement('option');
+                    opt.value = key
+                    opt.innerHTML = operations[key];
+                    list.appendChild(opt);
+                }
+
+        });
+    });
+
+    function calc() {
+        // Build formData object.
+        let formData = new FormData();
+
+        const x = document.getElementById('x-el');
+        const op = document.getElementById('op-el');
+        const y = document.getElementById('y-el');
+
+        formData.append('x', x.value);
+        formData.append('y', y.value);
+        formData.append('op', op.value);
+
+        fetch("http://localhost:5052/api/calc",
+        {
+            body: formData,
+            method: "post"
+        }).then(function(response) {
+          return response.text()
+        }).then(function(text) {
+            //text is the server's response
+        });
+    }
+
+    </script>
+}
