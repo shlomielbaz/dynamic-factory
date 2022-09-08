@@ -1,11 +1,11 @@
 # C# factory sample
 
-According to the `open close` principle, this example shows how functionality can be easily extended through the use of reflection,
+Follow the `open close` principle, this example shows how functionality can be easily extended through the use of reflection,
 
 The requirement is to create a calculator that supports basic math operations such as: addition (+), subtraction (-), multiplication (*) and division (/), but if we want to add a new operation i.g. modulus (%) the changes we will have to make in the code will be minor.
 
 ### Implemntation
-The idea to define groups of classes using reflection will be possible to filter a specific group according to interface and then using an identifier it will be possible to create an instance of an object
+The idea is to define a group of classes based on an interface, and then our factory will scan that group and find the desired class according to the `type` that is sent as an argument, and then it creates an instance.
 
 The following `AddOperation` class implements `ICalc` interface
 
