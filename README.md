@@ -1,4 +1,4 @@
-# C# factory sample
+# C# dynamic factory
 
 Follow the `open close` principle, this example shows how functionality can be easily extended through the use of reflection,
 
